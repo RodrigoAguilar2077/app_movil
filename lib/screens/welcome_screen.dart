@@ -15,6 +15,10 @@ class WelcomeScreen extends StatelessWidget {
             'assets/images/fondo_inicio.jpg',
             fit: BoxFit.cover,
           ),
+          // Capa oscura para mejorar la visibilidad del texto
+          Container(
+            color: Colors.black.withOpacity(0.5), // Ajusta la opacidad aquí
+          ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -26,39 +30,84 @@ class WelcomeScreen extends StatelessWidget {
                   color: Colors.white,
                   shadows: [
                     Shadow(
-                        offset: Offset(2, 2),
-                        blurRadius: 4,
-                        color: Colors.black45)
+                      offset: Offset(2, 2),
+                      blurRadius: 4,
+                      color: Colors.black54,
+                    )
                   ],
                 ),
               ),
               const SizedBox(height: 50),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const RegisterScreen()),
-                  );
-                },
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-                child: const Text('Registrarme',
-                    style: TextStyle(color: Colors.white)),
+              // Botón de "Iniciar sesión" en la parte superior
+              Opacity(
+                opacity: 0.8, // Ajusta la opacidad aquí (valor entre 0.0 y 1.0)
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 204, 195, 156),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 40, vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: const Text(
+                    'Iniciar sesión',
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 88, 74, 55), fontSize: 18),
+                  ),
+                ),
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const LoginScreen()),
-                  );
-                },
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                child: const Text('Iniciar sesión',
-                    style: TextStyle(color: Colors.white)),
+              // Botón de "Registrarme" en la parte inferior
+              Opacity(
+                opacity: 0.8, // Ajusta la opacidad aquí (valor entre 0.0 y 1.0)
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const RegisterScreen(),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 134, 126, 98),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 40, vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: const Text(
+                    'Registrarme',
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
+                ),
               ),
             ],
+          ),
+          // Leyenda de derechos de autor al final de la pantalla
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                '© 2025 FUTURETECH. Todos los derechos reservados.',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
           ),
         ],
       ),
