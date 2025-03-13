@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "91405691226",
+    "project_id": "integradoratest",
+    "storage_bucket": "integradoratest.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91405691226:android:ec80ea4dcc3ea5d8756b63",
+        "android_client_info": {
+          "package_name": "com.example.autopet_utt"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9fmcosKor9MVBC7z6Z01khlCzXq4P7rw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91405691226:android:ea9c59824be376d2756b63",
+        "android_client_info": {
+          "package_name": "com.futuretech.integradora"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9fmcosKor9MVBC7z6Z01khlCzXq4P7rw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
