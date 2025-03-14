@@ -1,5 +1,6 @@
 import 'dart:ui'; // Necesario para el filtro borroso
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; // Firestore para la BD
 import 'home_screen.dart';
 import 'register_screen.dart';
 
@@ -15,26 +16,38 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  // Datos simulados de usuario
-  final String _validEmail = "starlord@ejemplo.com";
-  final String _validPassword = "123456";
-
-  void _login() {
+  // Método para iniciar sesión validando con Firestore
+  void _login() async {
     if (_formKey.currentState!.validate()) {
-      // Verificar si el correo y la contraseña coinciden con los datos simulados
-      if (_emailController.text == _validEmail &&
-          _passwordController.text == _validPassword) {
+      try {
+        // Consulta en Firestore
+        QuerySnapshot query = await FirebaseFirestore.instance
+            .collection('usuarios')
+            .where('correo', isEqualTo: _emailController.text.trim())
+            .where('contraseña', isEqualTo: _passwordController.text.trim())
+            .get();
+
+        if (query.docs.isNotEmpty) {
+          // Credenciales correctas
+          var usuario = query.docs.first.data() as Map<String, dynamic>;
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("¡Bienvenido, ${usuario['nombre']}!")),
+          );
+
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
+          );
+        } else {
+          // Credenciales incorrectas
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Correo o contraseña incorrectos")),
+          );
+        }
+      } catch (e) {
+        // Manejo de errores
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Inicio de sesión exitoso")),
-        );
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
-        );
-      } else {
-        // Si las credenciales no coinciden
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Correo o contraseña incorrectos")),
+          SnackBar(content: Text("Error: $e")),
         );
       }
     }
